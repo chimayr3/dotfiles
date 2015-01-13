@@ -1,18 +1,13 @@
-set encoding=utf-8 nobomb
-" Afficher les numero de lignes
+" Afficher les numeros de lignes
 set number
 " Coloration syntaxique
 syntax on
-" Colore la ligne selectionne
-set cursorline
-" tabulation devient 2 espaces
+" tabulation devient deux espaces
 set tabstop=2
-" Colore recherche
+" Coloration de la recherche
 set hlsearch
-" recherche sans casse
+" recherche en ignorant la casse
 set ignorecase
-" Afficher la position du curseur
-set ruler
 " Afficher le mode actuel
 set showmode
 " Afficher le nom du fichier
