@@ -41,17 +41,13 @@ if [ "$(whoami)" = 'root' ] ; then
   }
 fi
 
-function _whichregexp(){
-  for i in $(echo ${PATH}|sed 's/:/ /g') ; do find ${i} -type f -name ${1} ; done
-}
-
 # User specific functions
 
-# _whichregexp : like which with regexp * extenson support
-function _whichregexp(){
+# _whichregexp : like which with regex * extenson support
+function _whichregex(){
   for i in $(echo ${PATH}|sed 's/:/ /g') ; do
     if [ -e "${i}" ] ; then
-      find $i -type f -name ${1}
+      find ${i} -type f -name ${1}
     fi
   done
 }
@@ -61,7 +57,7 @@ function _echoerr(){
   echo ${@} 1>&2
 }
 
-# _catconf : read (conf) file without comment and blank line
+# _catconf : read (conf) file without comment and blank lines
 function _catconf(){
   sed -e '/^#/d;/^$/d' ${1}
 }
@@ -76,6 +72,7 @@ function _check_size(){
   find . -xdev -type d -exec du -s {} \;|sort -rn|head -n${number}
 }
 
+# _extract : extract some archive files
 function extract(){
   file="${1}"
 
@@ -92,11 +89,12 @@ function extract(){
     *.tbz2)    tar xvjf "${1}" ;;
     *.tgz)     tar xvzf "${1}" ;;
     *.zip)     unzip "${1}"    ;;
+    *.rar)     unrar "${1}"    ;;
     *) echo "extract: ${1} : unknown archive method" ; exit 2 ;;
   esac
 }
 
 function _path(){
-  echo ${pwd}/${1}
+  echo "${pwd}/${1}"
 }
 
