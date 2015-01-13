@@ -1,0 +1,4 @@
+xterm*font:     *-fixed-*-*-*-20-*
+XTerm*background:       black
+XTerm*foreground:       white
+XTerm*cursorColor:      white
