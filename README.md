@@ -1,7 +1,7 @@
 Fichiers dotfiles
 ====
 
-	.bashrc
+  .bashrc
   .bash_profile
   .vimrc
   .Xdefaults
