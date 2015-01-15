@@ -4,6 +4,38 @@ export SVN_EDITOR=vim
 export HISTSIZE='999'
 export HISTFILESIZE="${HISTFILESIZE}";
 
+# Color Terminal
+
+# Normal Colors
+Black='\e[0;30m'        # Black
+Red='\e[0;31m'          # Red
+Green='\e[0;32m'        # Green
+Yellow='\e[0;33m'       # Yellow
+Blue='\e[0;34m'         # Blue
+Purple='\e[0;35m'       # Purple
+Cyan='\e[0;36m'         # Cyan
+White='\e[0;37m'        # White
+# Bold
+BBlack='\e[1;30m'       # Black
+BRed='\e[1;31m'         # Red
+BGreen='\e[1;32m'       # Green
+BYellow='\e[1;33m'      # Yellow
+BBlue='\e[1;34m'        # Blue
+BPurple='\e[1;35m'      # Purple
+BCyan='\e[1;36m'        # Cyan
+BWhite='\e[1;37m'       # White
+# Background
+On_Black='\e[40m'       # Black
+On_Red='\e[41m'         # Red
+On_Green='\e[42m'       # Green
+On_Yellow='\e[43m'      # Yellow
+On_Blue='\e[44m'        # Blue
+On_Purple='\e[45m'      # Purple
+On_Cyan='\e[46m'        # Cyan
+On_White='\e[47m'       # White
+
+NC="\e[m"               # Color Reset
+
 # Global - Useful Aliases
 
 alias e='echo'
@@ -29,6 +61,7 @@ alias di='df -Phi'
 alias df='df -P'
 alias ports='netstat -tulanp'
 alias s='ssh'
+alias s2='ssh -p 2222'
 
 # ArchLinux - Useful Aliases for my laptop
 
@@ -37,6 +70,12 @@ if grep --quiet 'Arch Linux' /etc/os-release 2>/dev/null ; then
   alias halt='sudo halt -p'
   alias reboot='sudo reboot'
   alias charge='acpi -V'
+  alias vnc='vinagre'
+  alias pdf='evince'
+  alias music='mocp'
+  alias top='htop'
+  alias ff='firefox'
+  alias kp='keepassx'
 fi
 
 # Utilities Functions
@@ -76,7 +115,7 @@ function conf(){ # read conf file without comments and blank lines
 }
 
 # function check_size
-function _check_size(){ # display bigest files and dir in current dir
+function _check_size(){ # display biggest files and dir in current dir
   is_integer ${1} && number="${1}" || number='10'
   echo " -- ${number} fichiers les plus volumineux :"
   find . -xdev -type f -exec du -s {} \;|sort -rn|head -n${number}
@@ -106,6 +145,16 @@ function extract(){ # extract some archive files
   esac
 }
 
+# function mktar
+function mktar(){ # make tar archive
+  tar -cvf "${1%%/}.tar" "${1}"
+}
+
+# function mktgz
+function mktgz(){ # make tar.gz archive
+  tar -cvzf "${1%%/}.tar.gz" "${1}"
+}
+
 # function path
 function path(){ # show full path for a file
   echo "${pwd}/${1}"
@@ -113,13 +162,8 @@ function path(){ # show full path for a file
 
 # function up
 function up(){ # up 2 do cd ../../ ;)
-  up="${1}"
-  if ! is_integer "${up}" ; then
-    echo "arg ${up} is not integer" ; return 1
-  fi
-
-  updir="" ; for i in $(seq 1 ${up}) ; do updir="${updir}../" ; done
-  cd $updir
+ is_integer "${1}" && for i in $(seq 1 ${1}) ; do cd .. ; done \
+    || echo "arg ${1} is not integer"
 }
 
 # function fonction
