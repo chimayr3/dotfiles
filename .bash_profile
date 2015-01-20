@@ -66,6 +66,10 @@ alias s2='ssh -p 2222'
 # ArchLinux - Useful Aliases for my laptop
 
 if grep --quiet 'Arch Linux' /etc/os-release 2>/dev/null ; then
+  # source alias for wiki connection
+  source ~/.alias_wifi
+  # source alias for server connection
+  source ~/.alias_server
   alias brightness='sudo /root/brightness/brightness.sh'
   alias halt='sudo halt -p'
   alias reboot='sudo reboot'
