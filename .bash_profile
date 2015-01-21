@@ -66,9 +66,9 @@ alias s2='ssh -p 2222'
 # ArchLinux - Useful Aliases for my laptop
 
 if grep --quiet 'Arch Linux' /etc/os-release 2>/dev/null ; then
-  # source alias for wiki connection
+  # source alias for wifi connection
   source ~/.alias_wifi
-  # source alias for server connection
+  # source alias for servers connection
   source ~/.alias_server
   alias brightness='sudo /root/brightness/brightness.sh'
   alias halt='sudo halt -p'
@@ -80,6 +80,14 @@ if grep --quiet 'Arch Linux' /etc/os-release 2>/dev/null ; then
   alias top='htop'
   alias ff='firefox'
   alias kp='keepassx'
+  alias pacupdate='pacman -Syu'
+  alias pacsearch='pacman -Ss'
+  alias pacinstall='pacman -S'
+  alias pacremove='pacman -R'
+  alias pacinfo='pacman -Si'
+  alias paclistfile='pacman -Ql'
+  alias paccleancache='pacman -Sc'
+  alias pacdownload='pacman -Sw'
 fi
 
 # Utilities Functions
@@ -157,6 +165,15 @@ function mktar(){ # make tar archive
 # function mktgz
 function mktgz(){ # make tar.gz archive
   tar -cvzf "${1%%/}.tar.gz" "${1}"
+}
+
+# function mcd
+function mcd(){ # do mkdir $1 ; cd $1
+  mkdir -p "${1}" && cd "${1}"
+}
+
+function lcd(){ # do cd $1 and ls 
+  cd "${1}" && ls
 }
 
 # function path
